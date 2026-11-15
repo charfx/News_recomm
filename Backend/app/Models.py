@@ -1,7 +1,9 @@
 from datetime import datetime
-from sqlalchemy import String, Text, Float, ForeignKey, DateTime, func, Index
+from sqlalchemy import Column, String, Text, Float, ForeignKey, DateTime, func, Index
 from sqlalchemy.orm import Mapped, mapped_column
 from .DB import Base
+from pgvector.sqlalchemy import Vector   # en haut du fichier
+
 
 class User(Base):
     __tablename__ = "users"
@@ -20,6 +22,7 @@ class News(Base):
     abstract: Mapped[str] = mapped_column(Text, default="")
     url: Mapped[str] = mapped_column(Text)
     published_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
+    embedding = Column(Vector(384), nullable=True)   # dans la classe News
 
 class UserSession(Base):
     __tablename__ = "user_sessions"

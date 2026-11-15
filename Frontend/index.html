@@ -5,30 +5,136 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Le Quotidien</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css?v=2">
 </head>
 <body>
-  <header class="masthead">
-    <div class="masthead-top">
-      <span id="today" class="masthead-date"></span>
-      <span id="user-email" class="masthead-user"></span>
+  <a class="skip-link" href="#contenu">Aller au contenu</a>
+
+  <!-- 1. Barre supérieure -->
+  <div class="topbar">
+    <div class="topbar-inner">
+      <span id="today" class="topbar-date"></span>
+      <div class="topbar-right">
+        <span id="user-email" class="topbar-user"></span>
+        <button id="logout" class="btn-link" type="button">Se déconnecter</button>
+        <label class="algo-tool" for="algo">
+          <span class="algo-label">Algorithme&nbsp;:</span>
+          <select id="algo">
+            <option value="tfidf">TF-IDF</option>
+            <option value="embedding">Embeddings</option>
+          </select>
+        </label>
+      </div>
     </div>
+  </div>
+
+  <!-- 2. Masthead -->
+  <header class="masthead">
     <h1 class="masthead-title">Le Quotidien</h1>
+    <p class="masthead-tagline">L'actualité, choisie pour vous</p>
   </header>
 
-  <main class="container">
-    <section class="section">
-      <h2 class="section-title">Recommandé pour toi</h2>
-      <div id="reco-list" class="grid grid-reco"></div>
+  <!-- 3. Navigation des rubriques (visuelle pour l'instant) -->
+  <nav class="sections-nav" aria-label="Rubriques">
+    <ul>
+      <li><a href="#" aria-current="page">Actualités</a></li>
+      <li><a href="#">Sports</a></li>
+      <li><a href="#">Finance</a></li>
+      <li><a href="#">Santé</a></li>
+      <li><a href="#">Art de vivre</a></li>
+      <li><a href="#">Voyage</a></li>
+      <li><a href="#">Vidéo</a></li>
+      <li><a href="#">Divertissement</a></li>
+      <li><a href="#">Météo</a></li>
+    </ul>
+  </nav>
+
+  <!-- 4. Corps -->
+  <main id="contenu" class="layout">
+    <section class="main-col" aria-labelledby="une-title">
+      <h2 id="une-title" class="section-title">À la une</h2>
+      <div id="news-list" class="news-list" aria-busy="true">
+        <div class="skeleton-hero">
+          <div class="sk sk-line sk-short"></div>
+          <div class="sk sk-title"></div>
+          <div class="sk sk-title sk-mid"></div>
+          <div class="sk sk-line"></div>
+          <div class="sk sk-line"></div>
+          <div class="sk sk-line sk-mid"></div>
+        </div>
+        <div class="skeleton-grid">
+          <div class="sk-card"><div class="sk sk-line sk-short"></div><div class="sk sk-title"></div><div class="sk sk-line"></div><div class="sk sk-line sk-mid"></div></div>
+          <div class="sk-card"><div class="sk sk-line sk-short"></div><div class="sk sk-title"></div><div class="sk sk-line"></div><div class="sk sk-line sk-mid"></div></div>
+          <div class="sk-card"><div class="sk sk-line sk-short"></div><div class="sk sk-title"></div><div class="sk sk-line"></div><div class="sk sk-line sk-mid"></div></div>
+          <div class="sk-card"><div class="sk sk-line sk-short"></div><div class="sk sk-title"></div><div class="sk sk-line"></div><div class="sk sk-line sk-mid"></div></div>
+        </div>
+      </div>
     </section>
 
-    <section class="section">
-      <h2 class="section-title">À la une</h2>
-      <div id="news-list" class="grid"></div>
-    </section>
+    <aside class="side-col" aria-labelledby="reco-title">
+      <div class="side-sticky">
+        <div class="side-head">
+          <h2 id="reco-title" class="section-title">Pour vous</h2>
+          <small id="reco-strategy" class="badge"></small>
+        </div>
+        <button id="reco-refresh" class="reco-refresh" type="button" hidden>
+          Nouvelles recommandations disponibles <span aria-hidden="true">↻</span>
+        </button>
+        <ol id="reco-list" class="reco-list" aria-live="polite" aria-busy="true">
+          <li class="sk-reco"><div class="sk sk-line sk-short"></div><div class="sk sk-line"></div></li>
+          <li class="sk-reco"><div class="sk sk-line sk-short"></div><div class="sk sk-line"></div></li>
+          <li class="sk-reco"><div class="sk sk-line sk-short"></div><div class="sk sk-line"></div></li>
+          <li class="sk-reco"><div class="sk sk-line sk-short"></div><div class="sk sk-line"></div></li>
+          <li class="sk-reco"><div class="sk sk-line sk-short"></div><div class="sk sk-line"></div></li>
+        </ol>
+      </div>
+    </aside>
   </main>
 
-  <script src="app.js"></script>
+  <!-- 5. Footer -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <p class="footer-title">Le Quotidien</p>
+        <p>Plateforme pédagogique de recommandation d'articles d'actualité. Les suggestions « Pour vous » sont calculées à partir de vos lectures, mentions « J'aime » et partages, selon l'algorithme choisi (TF-IDF ou embeddings sémantiques).</p>
+      </div>
+      <div class="footer-col">
+        <p class="footer-head">Rubriques</p>
+        <ul>
+          <li><a href="#">Actualités</a></li>
+          <li><a href="#">Sports</a></li>
+          <li><a href="#">Finance</a></li>
+          <li><a href="#">Santé</a></li>
+          <li><a href="#">Art de vivre</a></li>
+          <li><a href="#">Voyage</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <p class="footer-head">À propos</p>
+        <ul>
+          <li><a href="#">Le projet</a></li>
+          <li><a href="#">Comment fonctionnent les recommandations</a></li>
+          <li><a href="#">Données utilisées</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <p class="footer-head">Informations</p>
+        <ul>
+          <li><a href="#">Mentions légales</a></li>
+          <li><a href="#">Confidentialité</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© <span id="year"></span> Le Quotidien — projet de démonstration, contenus issus d'un jeu de données public.</span>
+    </div>
+  </footer>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <script src="app.js?v=2"></script>
 </body>
 </html>

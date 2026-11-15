@@ -9,21 +9,34 @@ import uuid
 from datetime import datetime, timezone
 from pydantic import BaseModel
 from Backend.app.Models import User, UserSession, Event
-
+from typing import Literal
+from Backend.app.Recommenders.Embedding import EmbeddingRecommender
+from Backend.app.Recommenders.Popularity_cold_start import PopularityRecommender
 
 
 app = FastAPI(title="News Recommender API")
-REC = TfidfRecommender().fit(load_news().reset_index(drop=True))   # au démarrage
+
+POP = PopularityRecommender().fit()
+
+REC = TfidfRecommender().fit(load_news().reset_index(drop=True))   
+
 INDEX = REC.index.to_dict()
+
+
+EMB = EmbeddingRecommender()   
+
 app.add_middleware(CORSMiddleware,
     allow_origins=["http://127.0.0.1:5500", "http://localhost:5500"],
     allow_methods=["*"], allow_headers=["*"])
+
+
+
 def get_db():
     db = SessionLocal()
     try:
-        yield db          # donne la session à la route
+        yield db          
     finally:
-        db.close()        # la ferme toujours, même en cas d'erreur
+        db.close()        
 
 @app.get("/news")
 def list_news(limit: int = 20, offset: int = 0, db: Session = Depends(get_db)):
@@ -34,14 +47,27 @@ def list_news(limit: int = 20, offset: int = 0, db: Session = Depends(get_db)):
 
 
 @app.get("/recommendations")
-def recommendations(user_id: int, k: int = 10):
+def recommendations(user_id: int, k: int = 10,
+                    strategy: Literal["tfidf", "embedding"] = "tfidf"):
     events = load_user_events(user_id)
-    profile = build_user_profile(events, REC.X, INDEX)
-    if profile is None:                                   # cold start
-        return {"strategy": "cold_start", "items": []}
-    recos = REC.recommend_for_user(profile, events["news_id"].tolist(), k)
-    recos = recos.rename(columns={"News_id": "id", "Category": "category", "Title": "title"})
-    return {"strategy": "tfidf", "items": recos.to_dict(orient="records")}
+    seen = events["news_id"].tolist()
+
+    if strategy == "embedding":
+        profile = EMB.build_user_profile(events)
+    else:
+        profile = build_user_profile(events, REC.X, INDEX)
+
+    # Pas encore d'interaction positive → cold start, identique pour tous les algos
+    if profile is None:
+        recos = POP.recommend(k, exclude=seen)
+        return {"strategy": "popularity_ranker", "items": recos.to_dict(orient="records")}
+
+    if strategy == "embedding":
+        recos = EMB.recommend_for_user(profile, seen, k)
+    else:
+        recos = REC.recommend_for_user(profile, seen, k)
+        recos = recos.rename(columns={"News_id": "id", "Category": "category", "Title": "title"})
+    return {"strategy": strategy, "items": recos.to_dict(orient="records")}
 
 @app.get("/news/{news_id}")
 def get_news(news_id: str, db: Session = Depends(get_db)):
@@ -75,10 +101,20 @@ def login(data: LoginIn, db: Session = Depends(get_db)):
     db.add(s); db.commit()
     return {"user_id": user.id, "session_id": s.id}
 
+UNIQUE_EVENTS = {"like", "share", "save", "not_interested"}   # au niveau du module, près de WEIGHTS
+
 @app.post("/events")
 def add_event(e: EventIn, db: Session = Depends(get_db)):
     if e.event_type not in WEIGHTS:
         raise HTTPException(400, "Type d'événement inconnu")
+
+    if e.event_type in UNIQUE_EVENTS:
+        exists = (db.query(Event)
+                    .filter_by(user_id=e.user_id, news_id=e.news_id, event_type=e.event_type)
+                    .first())
+        if exists:                                   # ← indenté sous le if
+            return {"ok": True, "duplicate": True}
+
     db.add(Event(user_id=e.user_id, session_id=e.session_id, news_id=e.news_id,
                  event_type=e.event_type, weight=WEIGHTS[e.event_type],
                  ts=datetime.now(timezone.utc)))

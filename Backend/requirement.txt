@@ -8,3 +8,6 @@ scipy
 scikit-learn
 python-dotenv
 alembic
+pgvector
+lightgbm
+joblib
