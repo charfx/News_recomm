@@ -4,16 +4,17 @@ from Backend.app.DB import engine
 
 DATA_PATH = Path(__file__).resolve().parents[2] / "data" / "news_clean.csv"
 
-def load_news(path: Path = DATA_PATH) -> pd.DataFrame:
-    df = pd.read_csv(path, sep=";", encoding="utf-8-sig")  # utf-8-sig retire le BOM
-    df.columns = df.columns.str.strip()
-    df = df.drop_duplicates(subset="News_id")              # un article = une ligne
-    for col in ["Title", "Abstract", "Category", "Subcategory"]:
-        df[col] = df[col].fillna("").astype(str).str.strip()
-    df["text"] = (df["Title"] + " " + df["Abstract"] + " "
-                  + df["Category"] + " " + df["Subcategory"])
-    df = df[df["text"].str.strip() != ""].reset_index(drop=True)
-    return df
+def load_news() -> pd.DataFrame:
+    """Articles depuis PostgreSQL, avec les noms de colonnes attendus par TF-IDF."""
+    sql = """
+        SELECT id AS "News_id", category AS "Category",
+               title AS "Title", COALESCE(abstract, '') AS "Abstract"
+        FROM news
+        ORDER BY id
+    """
+    news = pd.read_sql(sql, engine)
+    news["text"] = news["Title"] + " " + news["Abstract"]
+    return news
 
 def load_user_events(user_id: int) -> pd.DataFrame:
     """Somme des poids par article pour un utilisateur."""
