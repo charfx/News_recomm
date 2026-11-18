@@ -7,7 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=2">
+  <link rel="stylesheet" href="style.css?v=3">
 </head>
 <body>
   <a class="skip-link" href="#contenu">Aller au contenu</a>
@@ -19,7 +19,7 @@
       <div class="topbar-right">
         <span id="user-email" class="topbar-user"></span>
         <button id="logout" class="btn-link" type="button">Se déconnecter</button>
-        <label class="algo-tool" for="algo">
+        <label class="algo-tool admin-only" for="algo" hidden>
           <span class="algo-label">Algorithme&nbsp;:</span>
           <select id="algo">
             <option value="tfidf">TF-IDF</option>
@@ -29,6 +29,15 @@
       </div>
     </div>
   </div>
+
+  <!-- 1 bis. Navigation admin (cachée par défaut, affichée par app.js si role = admin) -->
+  <nav class="admin-nav admin-only" aria-label="Administration" hidden>
+    <ul>
+      <li><a href="index.html" aria-current="page">Articles</a></li>
+      <li><a href="algorithms.html">Algorithmes</a></li>
+      <li><a href="interactions.html">Interactions</a></li>
+    </ul>
+  </nav>
 
   <!-- 2. Masthead -->
   <header class="masthead">
@@ -135,6 +144,7 @@
 
   <div id="toast" class="toast" role="status" aria-live="polite"></div>
 
-  <script src="app.js?v=2"></script>
+  <script src="common.js?v=1"></script>
+  <script src="app.js?v=5"></script>
 </body>
 </html>

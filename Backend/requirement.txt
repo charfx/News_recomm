@@ -11,3 +11,5 @@ alembic
 pgvector
 lightgbm
 joblib
+bcrypt
+PyJWT

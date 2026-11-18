@@ -1,0 +1,588 @@
+{
+ "kpis": {
+  "users": 12,
+  "items": 20,
+  "events": 177,
+  "density": 0.3125
+ },
+ "by_type": [
+  {
+   "event_type": "click",
+   "count": 79
+  },
+  {
+   "event_type": "like",
+   "count": 34
+  },
+  {
+   "event_type": "skip",
+   "count": 33
+  },
+  {
+   "event_type": "dislike",
+   "count": 20
+  },
+  {
+   "event_type": "share",
+   "count": 11
+  }
+ ],
+ "by_day": [
+  {
+   "day": "2026-11-05",
+   "count": 10
+  },
+  {
+   "day": "2026-11-06",
+   "count": 16
+  },
+  {
+   "day": "2026-11-07",
+   "count": 12
+  },
+  {
+   "day": "2026-11-08",
+   "count": 15
+  },
+  {
+   "day": "2026-11-09",
+   "count": 17
+  },
+  {
+   "day": "2026-11-10",
+   "count": 10
+  },
+  {
+   "day": "2026-11-11",
+   "count": 14
+  },
+  {
+   "day": "2026-11-12",
+   "count": 10
+  },
+  {
+   "day": "2026-11-13",
+   "count": 13
+  },
+  {
+   "day": "2026-11-14",
+   "count": 7
+  },
+  {
+   "day": "2026-11-15",
+   "count": 10
+  },
+  {
+   "day": "2026-11-16",
+   "count": 10
+  },
+  {
+   "day": "2026-11-17",
+   "count": 18
+  },
+  {
+   "day": "2026-11-18",
+   "count": 15
+  }
+ ],
+ "top_items": [
+  {
+   "id": "N1074",
+   "title": "Un nouveau traitement contre la migraine",
+   "category": "finance",
+   "score": 25.0
+  },
+  {
+   "id": "N1592",
+   "title": "Le prix de l'électricité en baisse",
+   "category": "entertainment",
+   "score": 18.0
+  },
+  {
+   "id": "N1703",
+   "title": "Cuisine : la vague des légumes oubliés",
+   "category": "sports",
+   "score": 13.0
+  },
+  {
+   "id": "N1481",
+   "title": "Rénovation énergétique : les aides 2027",
+   "category": "lifestyle",
+   "score": 11.0
+  },
+  {
+   "id": "N1555",
+   "title": "Neige précoce dans les Alpes",
+   "category": "video",
+   "score": 11.0
+  },
+  {
+   "id": "N1296",
+   "title": "Transferts : le mercato s'emballe",
+   "category": "weather",
+   "score": 10.0
+  },
+  {
+   "id": "N1407",
+   "title": "Les cryptomonnaies sous surveillance",
+   "category": "finance",
+   "score": 10.0
+  },
+  {
+   "id": "N1444",
+   "title": "Un marathon record à Berlin",
+   "category": "health",
+   "score": 10.0
+  },
+  {
+   "id": "N1370",
+   "title": "Sommeil : ce que disent les dernières études",
+   "category": "sports",
+   "score": 9.0
+  },
+  {
+   "id": "N1333",
+   "title": "Inflation : les prix alimentaires ralentissent",
+   "category": "news",
+   "score": 8.0
+  }
+ ],
+ "top_categories": [
+  {
+   "category": "finance",
+   "score": 35.0
+  },
+  {
+   "category": "sports",
+   "score": 27.0
+  },
+  {
+   "category": "weather",
+   "score": 12.0
+  },
+  {
+   "category": "health",
+   "score": 10.0
+  },
+  {
+   "category": "entertainment",
+   "score": 10.0
+  },
+  {
+   "category": "video",
+   "score": 8.0
+  },
+  {
+   "category": "news",
+   "score": 7.0
+  },
+  {
+   "category": "lifestyle",
+   "score": 6.0
+  },
+  {
+   "category": "travel",
+   "score": -3.0
+  }
+ ],
+ "matrix": {
+  "users": [
+   {
+    "id": 1,
+    "email": "ahmad@gmail.com"
+   },
+   {
+    "id": 2,
+    "email": "lea@example.com"
+   },
+   {
+    "id": 3,
+    "email": "karim@example.com"
+   },
+   {
+    "id": 4,
+    "email": "sofia@example.com"
+   },
+   {
+    "id": 5,
+    "email": "julien@example.com"
+   },
+   {
+    "id": 6,
+    "email": "nadia@example.com"
+   },
+   {
+    "id": 7,
+    "email": "tom@example.com"
+   },
+   {
+    "id": 8,
+    "email": "ines@example.com"
+   },
+   {
+    "id": 9,
+    "email": "admin@example.com"
+   },
+   {
+    "id": 10,
+    "email": "yanis@example.com"
+   },
+   {
+    "id": 11,
+    "email": "clara@example.com"
+   },
+   {
+    "id": 12,
+    "email": "hugo@example.com"
+   }
+  ],
+  "items": [
+   {
+    "id": "N1000",
+    "title": "La BCE maintient ses taux directeurs"
+   },
+   {
+    "id": "N1037",
+    "title": "Coupe d'Europe : la surprise de la soirée"
+   },
+   {
+    "id": "N1074",
+    "title": "Un nouveau traitement contre la migraine"
+   },
+   {
+    "id": "N1111",
+    "title": "Les marchés asiatiques en repli"
+   },
+   {
+    "id": "N1148",
+    "title": "Le télétravail redessine les villes moyennes"
+   },
+   {
+    "id": "N1185",
+    "title": "Tempête attendue sur la façade atlantique"
+   },
+   {
+    "id": "N1222",
+    "title": "Cinq destinations pour l'hiver"
+   },
+   {
+    "id": "N1259",
+    "title": "Le festival du film ouvre ses portes"
+   },
+   {
+    "id": "N1296",
+    "title": "Transferts : le mercato s'emballe"
+   },
+   {
+    "id": "N1333",
+    "title": "Inflation : les prix alimentaires ralentissent"
+   },
+   {
+    "id": "N1370",
+    "title": "Sommeil : ce que disent les dernières études"
+   },
+   {
+    "id": "N1407",
+    "title": "Les cryptomonnaies sous surveillance"
+   },
+   {
+    "id": "N1444",
+    "title": "Un marathon record à Berlin"
+   },
+   {
+    "id": "N1481",
+    "title": "Rénovation énergétique : les aides 2027"
+   },
+   {
+    "id": "N1518",
+    "title": "Série événement : la saison finale"
+   },
+   {
+    "id": "N1555",
+    "title": "Neige précoce dans les Alpes"
+   },
+   {
+    "id": "N1592",
+    "title": "Le prix de l'électricité en baisse"
+   },
+   {
+    "id": "N1629",
+    "title": "Une start-up lève 40 millions"
+   },
+   {
+    "id": "N1666",
+    "title": "Le retour des trains de nuit"
+   },
+   {
+    "id": "N1703",
+    "title": "Cuisine : la vague des légumes oubliés"
+   }
+  ],
+  "values": [
+   [
+    4.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    -7.0,
+    -4.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    4.0,
+    0.0,
+    -2.0,
+    0.0,
+    3.0
+   ],
+   [
+    0.0,
+    -3.0,
+    5.0,
+    0.0,
+    3.0,
+    0.0,
+    4.0,
+    0.0,
+    2.0,
+    5.0,
+    2.0,
+    3.0,
+    2.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    3.0,
+    0.0,
+    0.0
+   ],
+   [
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    5.0,
+    4.0,
+    3.0,
+    1.0,
+    0.0,
+    4.0,
+    0.0,
+    1.0,
+    3.0,
+    0.0,
+    0.0,
+    0.0
+   ],
+   [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    -1.0,
+    0.0,
+    0.0,
+    -1.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ],
+   [
+    0.0,
+    3.0,
+    4.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    2.0,
+    0.0,
+    2.0,
+    0.0,
+    0.0,
+    0.0,
+    5.0,
+    0.0,
+    0.0,
+    0.0
+   ],
+   [
+    -3.0,
+    0.0,
+    0.0,
+    0.0,
+    -4.0,
+    0.0,
+    0.0,
+    -4.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    -4.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    -1.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    5.0,
+    3.0,
+    0.0,
+    -3.0,
+    0.0
+   ],
+   [
+    0.0,
+    3.0,
+    2.0,
+    0.0,
+    0.0,
+    -5.0,
+    1.0,
+    1.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    4.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ],
+   [
+    0.0,
+    2.0,
+    2.0,
+    0.0,
+    0.0,
+    -1.0,
+    0.0,
+    0.0,
+    4.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    6.0
+   ],
+   [
+    0.0,
+    0.0,
+    11.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    4.0,
+    6.0,
+    2.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    3.0
+   ],
+   [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    -1.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    3.0,
+    0.0,
+    0.0,
+    -1.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ],
+   [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    -4.0,
+    0.0,
+    -2.0,
+    -1.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    4.0,
+    3.0,
+    0.0,
+    6.0,
+    1.0,
+    0.0,
+    0.0
+   ]
+  ]
+ }
+}

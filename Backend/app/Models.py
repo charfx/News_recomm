@@ -47,3 +47,7 @@ class UserItemScore(Base):
     news_id: Mapped[str] = mapped_column(ForeignKey("news.id"), primary_key=True)
     score: Mapped[float] = mapped_column(Float, default=0)
     last_ts: Mapped[datetime] = mapped_column(DateTime(timezone=True))
+class AppSetting(Base):
+    __tablename__ = "app_settings"
+    key: Mapped[str] = mapped_column(String(50), primary_key=True)
+    value: Mapped[str] = mapped_column(Text)    

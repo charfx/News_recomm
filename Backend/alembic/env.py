@@ -43,3 +43,10 @@ if context.is_offline_mode():
     run_migrations_offline()
 else:
     run_migrations_online()
+
+
+def include_object(obj, name, type_, reflected, compare_to):
+    # Ne jamais toucher aux tables qui ne sont pas dans Models.py
+    if type_ == "table" and reflected and compare_to is None:
+        return False
+    return True

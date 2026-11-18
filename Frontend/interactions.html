@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Interactions · Le Quotidien</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css?v=3">
+</head>
+<body>
+  <a class="skip-link" href="#contenu">Aller au contenu</a>
+
+  <!-- 1. Barre supérieure -->
+  <div class="topbar">
+    <div class="topbar-inner">
+      <span id="today" class="topbar-date"></span>
+      <div class="topbar-right">
+        <span id="user-email" class="topbar-user"></span>
+        <button id="logout" class="btn-link" type="button">Se déconnecter</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 1 bis. Navigation admin -->
+  <nav class="admin-nav admin-only" aria-label="Administration" hidden>
+    <ul>
+      <li><a href="index.html">Articles</a></li>
+      <li><a href="algorithms.html">Algorithmes</a></li>
+      <li><a href="interactions.html" aria-current="page">Interactions</a></li>
+    </ul>
+  </nav>
+
+  <!-- 2. Masthead -->
+  <header class="masthead">
+    <h1 class="masthead-title">Le Quotidien</h1>
+    <p class="masthead-tagline">L'actualité, choisie pour vous</p>
+  </header>
+  <!-- 3. Corps -->
+  <main id="contenu" class="admin-page">
+    <div class="admin-head">
+      <h2 class="section-title">Interactions des lecteurs</h2>
+      <p class="admin-intro">
+        Toutes les recommandations partent de ces signaux : clics, « J'aime », partages…
+        Chaque événement ajoute un score à une case de la matrice utilisateurs × articles, que les algorithmes exploitent ensuite.
+      </p>
+      <p id="demo-banner" class="demo-banner" hidden>
+        <strong>Données de démonstration</strong> — l'API d'administration n'est pas encore disponible, les chiffres affichés sont factices.
+      </p>
+    </div>
+
+    <p id="load-error" class="empty" hidden></p>
+
+    <div id="dashboard" aria-busy="true">
+      <!-- Chiffres clés -->
+      <section aria-labelledby="kpi-title">
+        <h2 id="kpi-title" class="section-title">Chiffres clés</h2>
+        <div id="kpis" class="kpi-row"></div>
+        <p class="explain">
+          La densité mesure la part de cases remplies dans la matrice (interactions ÷ (utilisateurs × articles)) :
+          plus elle est faible, plus le problème est creux, et plus il est difficile de deviner les goûts d'un lecteur.
+        </p>
+      </section>
+
+      <div class="dash-grid">
+        <section class="dash-block" aria-labelledby="type-title">
+          <h2 id="type-title" class="section-title">Par type d'événement</h2>
+          <ul id="by-type" class="hbars"></ul>
+          <p class="explain">
+            Les clics sont nombreux mais peu engageants ; un « J'aime » ou un partage est rare mais dit beaucoup plus.
+            C'est pourquoi chaque type reçoit un poids différent dans le score.
+          </p>
+        </section>
+
+        <section class="dash-block" aria-labelledby="day-title">
+          <h2 id="day-title" class="section-title">Événements par jour</h2>
+          <div id="by-day"></div>
+          <p class="explain">
+            L'activité varie d'un jour à l'autre. Les algorithmes donnent plus de poids aux interactions récentes
+            (demi-vie) : un article lu hier compte davantage qu'un article lu il y a un mois.
+          </p>
+        </section>
+
+        <section class="dash-block" aria-labelledby="top-title">
+          <h2 id="top-title" class="section-title">Top 10 des articles</h2>
+          <ol id="top-items" class="top-list"></ol>
+          <p class="explain">
+            Somme des scores de tous les lecteurs pour chaque article. C'est l'idée de base de la recommandation
+            par popularité, utilisée quand on ne connaît pas encore un nouvel utilisateur (démarrage à froid).
+          </p>
+        </section>
+
+        <section class="dash-block" aria-labelledby="cat-title">
+          <h2 id="cat-title" class="section-title">Top catégories</h2>
+          <ul id="top-categories" class="hbars"></ul>
+          <p class="explain">
+            Score cumulé par rubrique. Une barre rouge signifie que les signaux négatifs (articles ignorés ou rejetés)
+            l'emportent : la rubrique intéresse peu les lecteurs.
+          </p>
+        </section>
+
+        <section class="dash-block dash-block--wide" aria-labelledby="matrix-title">
+          <h2 id="matrix-title" class="section-title">Matrice utilisateurs × articles</h2>
+          <div id="matrix" class="matrix-scroll"></div>
+          <div class="matrix-legend" id="matrix-legend"></div>
+          <p class="explain">
+            Chaque ligne est un lecteur, chaque colonne un article. Bleu : intérêt (clic, « J'aime », partage) ;
+            rouge : désintérêt ; case neutre : aucune interaction. Les cases vides, de loin les plus nombreuses,
+            sont justement ce que le filtrage collaboratif essaie de prédire.
+          </p>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <div id="tooltip" class="tooltip" role="tooltip"></div>
+
+
+  <!-- 4. Footer -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <p class="footer-title">Le Quotidien</p>
+        <p>Plateforme pédagogique de recommandation d'articles d'actualité. Espace d'administration : analyse des interactions des lecteurs.</p>
+      </div>
+      <div class="footer-col">
+        <p class="footer-head">Administration</p>
+        <ul>
+          <li><a href="index.html">Articles</a></li>
+          <li><a href="algorithms.html">Algorithmes</a></li>
+          <li><a href="interactions.html">Interactions</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <p class="footer-head">À propos</p>
+        <ul>
+          <li><a href="#">Le projet</a></li>
+          <li><a href="#">Comment fonctionnent les recommandations</a></li>
+          <li><a href="#">Données utilisées</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <p class="footer-head">Informations</p>
+        <ul>
+          <li><a href="#">Mentions légales</a></li>
+          <li><a href="#">Confidentialité</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© <span id="year"></span> Le Quotidien — projet de démonstration, contenus issus d'un jeu de données public.</span>
+    </div>
+  </footer>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <script src="common.js?v=1"></script>
+  <script src="interactions.js?v=1"></script>
+</body>
+</html>

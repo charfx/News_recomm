@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Connexion · Le Quotidien</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="login.css">
+</head>
+<body>
+  <main class="auth">
+    <header class="auth-head">
+      <h1 class="auth-logo">Le Quotidien</h1>
+      <p class="auth-tagline">L'actualité, choisie pour vous</p>
+    </header>
+ 
+    <section class="auth-card">
+      <div class="auth-tabs" role="tablist">
+        <button type="button" class="auth-tab active" data-mode="login">Connexion</button>
+        <button type="button" class="auth-tab" data-mode="register">Inscription</button>
+      </div>
+ 
+      <form id="auth-form" novalidate>
+        <label for="email">Email</label>
+        <input id="email" type="email" autocomplete="email" required>
+ 
+        <label for="password">Mot de passe</label>
+        <input id="password" type="password" autocomplete="current-password" minlength="6" required>
+ 
+        <p id="auth-error" class="auth-error" role="alert"></p>
+ 
+        <button id="auth-submit" type="submit" class="auth-submit">Se connecter</button>
+      </form>
+    </section>
+ 
+    <p class="auth-foot">Projet pédagogique · système de recommandation</p>
+  </main>
+ 
+  <script src="login.js"></script>
+</body>
+</html>
+ 

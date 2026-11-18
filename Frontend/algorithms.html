@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Algorithmes · Le Quotidien</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css?v=3">
+</head>
+<body>
+  <a class="skip-link" href="#contenu">Aller au contenu</a>
+
+  <!-- 1. Barre supérieure -->
+  <div class="topbar">
+    <div class="topbar-inner">
+      <span id="today" class="topbar-date"></span>
+      <div class="topbar-right">
+        <span id="user-email" class="topbar-user"></span>
+        <button id="logout" class="btn-link" type="button">Se déconnecter</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 1 bis. Navigation admin -->
+  <nav class="admin-nav admin-only" aria-label="Administration" hidden>
+    <ul>
+      <li><a href="index.html">Articles</a></li>
+      <li><a href="algorithms.html" aria-current="page">Algorithmes</a></li>
+      <li><a href="interactions.html">Interactions</a></li>
+    </ul>
+  </nav>
+
+  <!-- 2. Masthead -->
+  <header class="masthead">
+    <h1 class="masthead-title">Le Quotidien</h1>
+    <p class="masthead-tagline">L'actualité, choisie pour vous</p>
+  </header>
+
+  <!-- 3. Corps -->
+  <main id="contenu" class="admin-page">
+    <div class="admin-head">
+      <h2 class="section-title">Algorithmes de recommandation</h2>
+      <p class="admin-intro">
+        Chaque carte décrit un algorithme : son principe, ses étapes, sa formule, ses limites et son code.
+        Réglez ses paramètres puis cliquez sur « Activer » : il sera utilisé pour calculer la colonne « Pour vous » de tous les lecteurs.
+      </p>
+      <p id="demo-banner" class="demo-banner" hidden>
+        <strong>Données de démonstration</strong> — l'API d'administration n'est pas encore disponible, les informations affichées sont factices.
+      </p>
+    </div>
+
+    <div id="families" aria-busy="true">
+      <p class="empty">Chargement des algorithmes…</p>
+    </div>
+  </main>
+
+  <!-- 4. Footer -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <p class="footer-title">Le Quotidien</p>
+        <p>Plateforme pédagogique de recommandation d'articles d'actualité. Espace d'administration : choix et réglage de l'algorithme de recommandation.</p>
+      </div>
+      <div class="footer-col">
+        <p class="footer-head">Administration</p>
+        <ul>
+          <li><a href="index.html">Articles</a></li>
+          <li><a href="algorithms.html">Algorithmes</a></li>
+          <li><a href="interactions.html">Interactions</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <p class="footer-head">À propos</p>
+        <ul>
+          <li><a href="#">Le projet</a></li>
+          <li><a href="#">Comment fonctionnent les recommandations</a></li>
+          <li><a href="#">Données utilisées</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <p class="footer-head">Informations</p>
+        <ul>
+          <li><a href="#">Mentions légales</a></li>
+          <li><a href="#">Confidentialité</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© <span id="year"></span> Le Quotidien — projet de démonstration, contenus issus d'un jeu de données public.</span>
+    </div>
+  </footer>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <script src="common.js?v=1"></script>
+  <script src="algorithms.js?v=1"></script>
+</body>
+</html>

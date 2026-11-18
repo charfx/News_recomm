@@ -14,15 +14,33 @@ def rows():
                 news_id, clicked = item.rsplit("-", 1)      # "N55689-1" → N55689, 1
                 yield (int(imp_id), user, ts, news_id, pos, int(clicked))
 
+CREATE_SQL = """
+CREATE TABLE IF NOT EXISTS hist_impressions (
+    impression_id INTEGER     NOT NULL,
+    user_id       VARCHAR(20) NOT NULL,
+    ts            TIMESTAMPTZ NOT NULL,
+    news_id       VARCHAR(20) NOT NULL,
+    position      SMALLINT    NOT NULL,
+    clicked       SMALLINT    NOT NULL
+)
+"""
+INDEX_SQL = [
+    "CREATE INDEX IF NOT EXISTS ix_hist_ts ON hist_impressions (ts)",
+    "CREATE INDEX IF NOT EXISTS ix_hist_news_ts ON hist_impressions (news_id, ts)",
+]
+
 raw = engine.raw_connection()          # connexion psycopg « brute » pour COPY
 try:
     with raw.cursor() as cur:
-        cur.execute("TRUNCATE hist_impressions")      # import rejouable : on repart de zéro
+        cur.execute(CREATE_SQL)                         # crée la table si besoin
+        cur.execute("TRUNCATE hist_impressions")        # import rejouable : on repart de zéro
         with cur.copy("COPY hist_impressions (impression_id, user_id, ts, news_id, position, clicked) FROM STDIN") as cp:
             for n, r in enumerate(rows(), start=1):
                 cp.write_row(r)
                 if n % 1_000_000 == 0:
                     print(f"{n:,} lignes…")
+        for sql in INDEX_SQL:                           # index APRÈS le chargement : plus rapide
+            cur.execute(sql)
     raw.commit()
     print("Import terminé")
 finally:
